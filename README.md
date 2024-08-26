@@ -3,11 +3,19 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Usage
 
-1. [Install Docker](https://docs.docker.com/get-started/get-docker/) on your machine.
+1. In the route folder create `.env.local` file.
 
-2. Build your container: docker build -t innoscripta-news-feed ..
+2. Add the following variables and add the keys for each one of them:
 
-3. Run your container: docker run -p 3000:3000 innoscripta-news-feed
+NEXT_PUBLIC_API_KEY_NY_TIMES=<API_KEY>
+NEXT_PUBLIC_API_KEY_THE_GUARDIAN=<API_KEY>
+NEXT_PUBLIC_API_KEY_NEWS_API=<API_KEY>
+
+3. [Install Docker](https://docs.docker.com/get-started/get-docker/) on your machine.
+
+4. Build your container: `docker build -t innoscripta-news-feed .`
+
+5. Run your container: `docker run -p 3000:3000 innoscripta-news-feed`
 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
