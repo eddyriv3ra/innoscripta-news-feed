@@ -7,9 +7,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 2. Add the following variables and add the keys for each one of them:
 
-NEXT_PUBLIC_API_KEY_NY_TIMES=<API_KEY>
-NEXT_PUBLIC_API_KEY_THE_GUARDIAN=<API_KEY>
-NEXT_PUBLIC_API_KEY_NEWS_API=<API_KEY>
+- NEXT_PUBLIC_API_KEY_NY_TIMES=<API_KEY>
+- NEXT_PUBLIC_API_KEY_THE_GUARDIAN=<API_KEY>
+- NEXT_PUBLIC_API_KEY_NEWS_API=<API_KEY>
 
 3. [Install Docker](https://docs.docker.com/get-started/get-docker/) on your machine.
 
