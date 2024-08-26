@@ -1,0 +1,24 @@
+.main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.mainContainer {
+  height: 100%;
+  margin: 50px;
+  width: 1600px;
+}
+
+.inputsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.articlesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 70px;
+  justify-content: space-between;
+  margin-top: 50px;
+}

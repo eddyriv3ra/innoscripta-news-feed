@@ -1,94 +1,63 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import Select from "./components/Select";
+import styles from "./page.module.scss";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { getNewsByQuery } from "@/services/apis";
+import { Box, Button, Text, TextField } from "@radix-ui/themes";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { transformData } from "./utils";
+import { NEWS_VALUES, options } from "./global";
+import Article from "./components/Article";
+import { IArticle } from "./interfaces";
 
 export default function Home() {
+ 
+  const [source, setSource] = useState(NEWS_VALUES.NEW_YORK_TIMES);
+  const [query, setQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = () => {
+    setSearchQuery(query);
+  };
+
+  const { data, error, isError, isSuccess, isLoading } = useQuery({
+    queryKey: ["everything", searchQuery, source],
+    queryFn: () => getNewsByQuery(searchQuery || "latest", source), // Default to 'latest' if no query
+    select: (data: unknown) => transformData(data, source),
+  });
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+      <div className={styles.mainContainer}>
+        <div className={styles.inputsContainer}>
+          <Select
+            options={options}
+            label="News feed"
+            setValue={setSource}
+            value={source}
+          />
+          <Box maxWidth="200px">
+            <TextField.Root
+              placeholder="Search..."
+              onChange={onChange}
+              value={query}
+              size="3"
             />
-          </a>
+          </Box>
+          <Button size="3" variant="solid" onClick={handleSearch}>
+            <MagnifyingGlassIcon /> Search
+          </Button>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <div className={styles.articlesContainer}>
+          {data?.map((item: IArticle) => 
+              <Article item={item} />
+          )}
+        </div>
       </div>
     </main>
   );
