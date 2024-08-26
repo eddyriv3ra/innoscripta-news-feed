@@ -1,3 +1,5 @@
+@use "@/app/styles/media-query" as *;
+
 .main {
   min-height: 100vh;
   display: flex;
@@ -8,11 +10,29 @@
   height: 100%;
   margin: 50px;
   width: 1600px;
+
+  @include mq(sm) {
+    width: auto;
+    min-width: 300px;
+  }
 }
 
 .inputsContainer {
   display: flex;
   justify-content: space-between;
+
+  @include mq(md) {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.textFieldContainer {
+  width: 200px;
+
+  @include mq(md) {
+    width: 100%;
+  }
 }
 
 .articlesContainer {
@@ -21,6 +41,10 @@
   gap: 70px;
   justify-content: space-between;
   margin-top: 50px;
+
+  @include mq(md) {
+    justify-content: center;
+  }
 }
 
 .spinnerContainer {

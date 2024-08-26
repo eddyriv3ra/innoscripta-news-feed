@@ -1,5 +1,5 @@
 "use client";
-import React, { ForwardedRef, ReactNode } from "react";
+import { ForwardedRef, forwardRef, ReactNode } from "react";
 import * as Select from "@radix-ui/react-select";
 import classnames from "classnames";
 import {
@@ -25,7 +25,9 @@ const SelectComponent = ({ options, setValue, value, label }: ISelect) => {
   return (
     <Select.Root value={value} onValueChange={setValue}>
       <Select.Trigger className="SelectTrigger" aria-label="News">
-        <Select.Value aria-label={value}>{options.find(option => option.label === value)?.label}</Select.Value>
+        <Select.Value aria-label={value}>
+          {options.find((option) => option.label === value)?.label}
+        </Select.Value>
         <Select.Icon className="SelectIcon">
           <ChevronDownIcon />
         </Select.Icon>
@@ -59,7 +61,7 @@ interface ISelectItem extends Select.SelectItemProps {
   className?: string;
 }
 
-const SelectItem = React.forwardRef(
+const SelectItem = forwardRef(
   (
     { children, className, ...props }: ISelectItem,
     forwardedRef: ForwardedRef<HTMLDivElement>

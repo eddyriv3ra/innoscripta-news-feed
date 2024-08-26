@@ -1,0 +1,17 @@
+$breakpoints: (
+  sm: 768px,
+  md: 1024px,
+  lg: 1280px,
+);
+
+@mixin mq($key) {
+  $size: map-get($breakpoints, $key);
+
+  @if ($size) {
+    @media only screen and (max-width: $size) {
+      @content;
+    }
+  } @else {
+    @error '`#{$key}` does not exist in the $breakpoints';
+  }
+}

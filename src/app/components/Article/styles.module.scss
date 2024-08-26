@@ -1,3 +1,5 @@
+@use "@/app/styles/media-query" as *;
+
 .newsContainer {
   width: 400px;
   height: 550px;
@@ -6,6 +8,14 @@
   -webkit-box-shadow: 10px 10px 11px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 11px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 11px 0px rgba(0, 0, 0, 0.75);
+
+  @include mq(md) {
+    width: 100%;
+  }
+
+  @include mq(sm) {
+    width: 100%;
+  }
 }
 
 .imgContainer {

@@ -4,7 +4,7 @@ import styles from "./page.module.scss";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getNewsByQuery } from "@/services/apis";
-import { Box, Button, Spinner, Text, TextField } from "@radix-ui/themes";
+import { Box, Button, Spinner, TextField } from "@radix-ui/themes";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { transformData } from "./utils";
 import { NEWS_VALUES, options } from "./global";
@@ -40,9 +40,6 @@ export default function Home() {
     setFilteredByDate(filteredData);
   };
 
-  if (isLoading) {
-  }
-
   const articles = date ? filteredByDate : data;
 
   return (
@@ -55,7 +52,7 @@ export default function Home() {
             setValue={setSource}
             value={source}
           />
-          <Box maxWidth="200px">
+          <Box className={styles.textFieldContainer}>
             <TextField.Root
               placeholder="Search..."
               onChange={onChange}
@@ -63,10 +60,10 @@ export default function Home() {
               size="3"
             />
           </Box>
-          <Button size="3" variant="solid" onClick={handleSearch}>
+          <Button size="3" variant="solid" onClick={handleSearch} disabled={!query}>
             <MagnifyingGlassIcon /> Search
           </Button>
-          <Box maxWidth="200px">
+          <Box className={styles.textFieldContainer}>
             <TextField.Root
               placeholder="dd/mm/yy"
               type="date"
