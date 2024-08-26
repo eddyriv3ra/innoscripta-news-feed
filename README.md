@@ -7,7 +7,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 2. Build your container: docker build -t innoscripta-news-feed ..
 
-3, Run your container: docker run -p 3000:3000 innoscripta-news-feed
+3. Run your container: docker run -p 3000:3000 innoscripta-news-feed
 
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
